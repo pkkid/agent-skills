@@ -39,4 +39,8 @@ cp -R skills/* ~/.gemini/antigravity/skills/   # Antigravity
 ## Credits
 
 The initial skills come from [t3dotgg/tstack](https://github.com/t3dotgg/tstack)
-(commit `1085050`), MIT licensed. See [LICENSE-tstack](LICENSE-tstack).
+(commit `1085050`), MIT licensed.
+
+## License
+
+[MIT](LICENSE)
