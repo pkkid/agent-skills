@@ -32,10 +32,19 @@ Dependencies between skills:
 ## Install
 
 ```bash
-cp -R skills/* ~/.claude/skills/               # Claude Code
-cp -R skills/* ~/.codex/skills/                # Codex
-cp -R skills/* ~/.gemini/antigravity/skills/   # Antigravity
+./install.sh all           # every installed tool
+./install.sh claude        # or one of: claude, codex, antigravity
 ```
+
+This symlinks each skill into the tool's skill folder, so edits made from any
+session land in this repo. `all` skips tools that aren't installed; naming a
+tool sets it up even if it isn't. Run it again after adding, removing, or
+renaming a skill.
+
+- Anything already in the way, like a copy from an older install, is kept
+  with a warning. `--force` replaces it.
+- `--uninstall` removes only the links that point into this repo. Run it
+  before moving the repo, then install again from the new location.
 
 ## Requirements
 
