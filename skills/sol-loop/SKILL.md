@@ -1,6 +1,10 @@
 ---
 name: sol-loop
 description: Use when the user says "sol loop".
+license: MIT
+metadata:
+  author: Theo Browne
+  source: https://github.com/t3dotgg/tstack
 ---
 
 # sol-loop

@@ -1,6 +1,10 @@
 ---
 name: council
 description: Trigger this if the user says 'council'.
+license: MIT
+metadata:
+  author: Theo Browne
+  source: https://github.com/t3dotgg/tstack
 ---
 
 # Council

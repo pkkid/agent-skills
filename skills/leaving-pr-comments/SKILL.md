@@ -1,6 +1,10 @@
 ---
 name: leaving-pr-comments
 description: Use whenever leaving comments on GitHub.
+license: MIT
+metadata:
+  author: Theo Browne
+  source: https://github.com/t3dotgg/tstack
 ---
 
 # Leaving PR Comments

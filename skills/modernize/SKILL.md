@@ -3,6 +3,10 @@ name: modernize
 description: >-
   For getting old prs up to date. Use when asked to rebase a pr or
   "modernize".
+license: MIT
+metadata:
+  author: Theo Browne
+  source: https://github.com/t3dotgg/tstack
 ---
 
 # Modernize

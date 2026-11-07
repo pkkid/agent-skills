@@ -1,6 +1,10 @@
 ---
 name: file-pr
 description: File a concise pull request. Use when the user asks to file, open, or create a PR.
+license: MIT
+metadata:
+  author: Theo Browne
+  source: https://github.com/t3dotgg/tstack
 ---
 
 # File PR

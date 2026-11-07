@@ -1,6 +1,10 @@
 ---
 name: babysit-pr
 description: Monitor a pull request through review and CI. Use when the user asks to monitor, watch, or babysit a PR.
+license: MIT
+metadata:
+  author: Theo Browne
+  source: https://github.com/t3dotgg/tstack
 ---
 
 # Babysit PR
@@ -37,11 +41,11 @@ branch conflicts.
 
 ### Everywhere else: `pr-wait`
 
-Wait with `scripts/pr-wait` from this skill's directory (use its absolute
+Wait with `pr-wait.py` from this skill's directory (use its absolute
 path).
 
 ```bash
-pr-wait <pr> [--repo owner/name] [--until ready|green|any-change]
+pr-wait.py <pr> [--repo owner/name] [--until ready|green|any-change]
 ```
 
 It prints one line per real event. It exits 0 when the `--until` condition is

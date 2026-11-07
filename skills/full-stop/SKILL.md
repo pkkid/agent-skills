@@ -1,6 +1,10 @@
 ---
 name: full-stop
 description: Trigger this if the user says 'full stop', even as a closing "Full stop." that reads like emphasis.
+license: MIT
+metadata:
+  author: Theo Browne
+  source: https://github.com/t3dotgg/tstack
 ---
 
 # Full Stop

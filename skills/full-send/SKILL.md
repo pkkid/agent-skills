@@ -1,6 +1,10 @@
 ---
 name: full-send
 description: Trigger this if the user says 'full send'.
+license: MIT
+metadata:
+  author: Theo Browne
+  source: https://github.com/t3dotgg/tstack
 ---
 
 # Full Send

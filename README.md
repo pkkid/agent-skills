@@ -14,6 +14,9 @@ folder under `skills/` with a `SKILL.md`, the format all three tools read.
 | `file-pr` | "file a PR" | Files a short PR that leads with the problem, not an inventory of changes. |
 | `babysit-pr` | "babysit" | Watches a PR through CI and review bots, and fixes the real findings. |
 | `modernize` | "modernize" | Rebases an old PR and decides if it should still exist. |
+| `milestone-plan` | "milestone plan" | Plans the roadmap's milestones (15 at most) and breaks one into tasks that 5 to 8 workers can build in parallel. Files the plan as a PR. |
+| `milestone-start` | "milestone start M3" | Runs a roadmap milestone with parallel workers, one `full-send` per task, until its review. Plans the milestone first if it has no tasks yet. |
+| `milestone-review` | "milestone review" | Writes the milestone's review report, asks the maintainer's questions, and takes the review PR to ready with `full-stop`. |
 | `leaving-pr-comments` | (automatic) | Formats comments that an agent posts on your behalf. |
 
 Dependencies between skills:
@@ -21,6 +24,9 @@ Dependencies between skills:
 - `full-send` uses `sol-loop`, `file-pr`, and `babysit-pr`.
 - `full-stop` uses `full-send`.
 - `file-pr`, `babysit-pr`, and `modernize` use `leaving-pr-comments`.
+- `milestone-plan` uses `file-pr`.
+- `milestone-start` uses `milestone-plan`, `full-send`, and `milestone-review`.
+- `milestone-review` uses `milestone-plan`, `full-stop`, and `full-send`.
 
 ## Install
 
@@ -33,12 +39,12 @@ cp -R skills/* ~/.gemini/antigravity/skills/   # Antigravity
 ## Requirements
 
 - An authenticated [GitHub CLI](https://cli.github.com) (`gh`).
-- `python3` for `babysit-pr`'s `pr-wait` script.
+- `python3` for `babysit-pr`'s `pr-wait.py` script.
 - `council` and `sol-loop` need subagents on other providers' models.
 
 ## Credits
 
-The initial skills come from [t3dotgg/tstack](https://github.com/t3dotgg/tstack)
+The `milestone-*` skills started in one of my own projects. The others come from [t3dotgg/tstack](https://github.com/t3dotgg/tstack)
 (commit `1085050`), MIT licensed.
 
 ## License
