@@ -14,6 +14,7 @@ folder under `skills/` with a `SKILL.md`, the format all three tools read.
 | `file-pr` | "file a PR" | Files a short PR that leads with the problem, not an inventory of changes. |
 | `babysit-pr` | "babysit" | Watches a PR through CI and review bots, and fixes the real findings. |
 | `modernize` | "modernize" | Rebases an old PR and decides if it should still exist. |
+| `generate` | "/generate a ..." | Makes images and videos through OpenRouter on the cheapest model that fits, and quotes cost before paid video runs. |
 | `milestone-plan` | "milestone plan" | Plans the roadmap's milestones (15 at most) and breaks one into tasks that 5 to 8 workers can build in parallel. Files the plan as a PR. |
 | `milestone-start` | "milestone start M3" | Runs a roadmap milestone with parallel workers, one `full-send` per task, until its review. Plans the milestone first if it has no tasks yet. |
 | `milestone-review` | "milestone review" | Writes the milestone's review report, asks the maintainer's questions, and takes the review PR to ready with `full-stop`. |
@@ -39,7 +40,8 @@ cp -R skills/* ~/.gemini/antigravity/skills/   # Antigravity
 ## Requirements
 
 - An authenticated [GitHub CLI](https://cli.github.com) (`gh`).
-- `python3` for `babysit-pr`'s `pr-wait.py` script.
+- `python3` for `babysit-pr`'s `pr-wait.py` and `generate`'s `generate.py`.
+- An [OpenRouter](https://openrouter.ai) API key for `generate`: `OPENROUTER_API_KEY`, or `AI_ENV_FILE` pointing at a `KEY=value` file.
 - `council` and `sol-loop` need subagents on other providers' models.
 
 ## Credits
