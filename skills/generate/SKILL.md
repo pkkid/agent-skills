@@ -1,6 +1,6 @@
 ---
 name: generate
-description: Generate images and videos through OpenRouter, on the cheapest model that fits, quoting cost before paid video runs.
+description: Generate images and videos through OpenRouter.
 argument-hint: "<what to make>"
 license: MIT
 metadata:
