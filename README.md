@@ -44,8 +44,8 @@ cp -R skills/* ~/.gemini/antigravity/skills/   # Antigravity
 
 ## Credits
 
-The `milestone-*` skills started in one of my own projects. The others come from [t3dotgg/tstack](https://github.com/t3dotgg/tstack)
-(commit `1085050`), MIT licensed.
+Many of these skills came from other repos:
+* [t3dotgg/tstack](https://github.com/t3dotgg/tstack), MIT licensed
 
 ## License
 
