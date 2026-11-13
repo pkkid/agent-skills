@@ -11,6 +11,40 @@ Use the first that exists:
 2. GitHub milestones or epic issues. Issue bodies hold the task fields.
 3. Neither: `milestone-plan` creates `docs/roadmap.md`.
 
+## Branches
+
+- Each milestone has one branch, `milestone/M<n>`, cut from the default
+  branch when the milestone starts.
+- Each task is a `task/<id>-<slug>` branch cut from the milestone branch,
+  and its PR targets the milestone branch. Workers merge their own task PRs
+  into it once checks pass.
+- The review adds the report to the milestone branch, then opens the
+  **milestone PR**: `milestone/M<n>` into the default branch. That PR is what
+  the maintainer reviews and merges to approve the milestone.
+- Agents may commit and merge anything into the milestone branch, including
+  the review. Agents never commit, push or merge to the default branch, and
+  never merge the milestone PR: a human does that. Project rules can rename branches but cannot relax this.
+
+## GitHub issues
+
+When stories are tracked as GitHub issues (a project rule, or the maintainer
+asks), they follow this shape. Create them one milestone at a time, only
+after the maintainer approves that milestone's stories.
+
+- **One parent issue per milestone**, titled `M<n>: <name>`, holding the
+  Goal, In and Out, Done when, Parallelism, and a link to the roadmap. Create
+  it first.
+- **Every story is a sub-issue of it** (GitHub sub-issues), including
+  `M<n>.R`. Titles are `M<n>.<k> <name>`; bodies hold the task fields, with
+  `after` written as issue refs (`#12 (M2.3)`).
+- The parent and every story share one GitHub milestone, and all of them are
+  added to the project board when the project has one.
+- The roadmap links them: the milestone heading links the parent issue, each
+  task block gets `- issue: #<n>`.
+- Task PRs merge into the milestone branch, which does not auto-close issues,
+  so each worker closes its own story issue after its PR merges. The
+  milestone PR closes `M<n>.R` and the parent issue.
+
 ## Shape
 
 ```markdown
@@ -51,5 +85,6 @@ Parallelism: 2 waves (2, 1); critical path M2.1 > M2.R.
   (lockfiles, root manifest, module index) are allowed small edits by anyone.
 - The worker ticks its task in its PR: `### M2.1 Crop tool ✅ (#123)`.
 - A task waiting on the maintainer gets `- blocked: <question>`.
-- Each milestone ends with one review, `owner: maintainer`. Nothing after it
+- Each milestone ends with one review, `owner: maintainer`. Its PR is the
+  milestone PR into the default branch; only the maintainer merges it. Nothing after it
   starts until its PR is merged.

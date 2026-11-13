@@ -13,6 +13,17 @@ Read [roadmap-format.md](roadmap-format.md) first. Target is `M<n>`, or `all`
 for a new roadmap. Default: create the roadmap if none exists, else plan the
 next milestone without tasks.
 
+**Branch rule (never overridden).** All of a milestone's work lands on its
+milestone branch `milestone/M<n>`, never on the default branch. Agents never
+commit, push or merge to the default branch. The only way milestone work
+reaches it is the milestone PR (`milestone/M<n>` into the default branch),
+which only the maintainer (a human) merges. Agents may commit and merge task
+and review work into the milestone branch.
+
+**Project rules win** (except the branch rule above). If AGENTS.md or CLAUDE.md has a **Milestone runs** section, read it
+first and follow it; it overrides the defaults in this skill (branches, merge method, board,
+worker environment, review extras).
+
 ## 1. Learn the project
 
 Read the docs, the existing roadmap, the last review report, and what the user
@@ -51,6 +62,10 @@ usually 10 to 25 tasks in 2 to 4 waves. Each task is one PR.
 
 ## 5. File
 
+- Stories go to GitHub only after the maintainer approves them. Then create
+  the milestone's parent issue and each story as its sub-issue, as in
+  [roadmap-format.md](roadmap-format.md#github-issues).
 - Called from `milestone-review`: write on its review branch and stop.
 - Otherwise: branch `roadmap/M<n>` (or `roadmap/init`), `file-pr`, and stop.
-  The maintainer merges it, then runs `milestone-start`.
+  Never commit the roadmap to the default branch yourself. The maintainer
+  merges it, then runs `milestone-start`.

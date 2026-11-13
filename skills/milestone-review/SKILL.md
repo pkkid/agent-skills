@@ -12,8 +12,21 @@ metadata:
 Target: `M<n>.R` (default: first open review). Format:
 [roadmap-format.md](../milestone-plan/roadmap-format.md).
 
-Prepare the review so the maintainer can decide fast, then stop. **Never merge
-the review PR, enable auto-merge, or close its issue.**
+**Branch rule (never overridden).** All of a milestone's work lands on its
+milestone branch `milestone/M<n>`, never on the default branch. Agents never
+commit, push or merge to the default branch. The only way milestone work
+reaches it is the milestone PR (`milestone/M<n>` into the default branch),
+which only the maintainer (a human) merges. Agents may commit and merge task
+and review work into the milestone branch.
+
+**Project rules win** (except the branch rule above). If AGENTS.md or CLAUDE.md has a **Milestone runs** section, read it
+first and follow it; it overrides the defaults in this skill (branches, merge method, board,
+worker environment, review extras).
+
+Prepare the review so the maintainer can decide fast, then stop. You may
+commit the review and merge review work into `milestone/M<n>` freely. **Never
+merge the milestone PR into the default branch, enable auto-merge on it, or
+push to the default branch: that merge is the maintainer's, a human's, only.**
 
 ## 1. Gather
 
@@ -41,9 +54,11 @@ Write `docs/reviews/M<n>.md`:
 If the harness can publish a page (Artifact in Claude Code), publish it there
 too and link it.
 
-## 3. Review branch
+## 3. Review commit and milestone PR
 
-Branch `review/M<n>.R`. Everything goes in this one PR:
+Commit the review on `milestone/M<n>` (directly, or via a `review/M<n>.R`
+branch merged into it). The PR you open is the **milestone PR**:
+`milestone/M<n>` into the default branch, holding every task's work plus:
 
 - the report;
 - roadmap: milestone ✅ in the Overview, review task ✅;
@@ -65,9 +80,11 @@ release only when the maintainer says so after merging.
 
 ## 6. Finish with full-stop
 
-Commit `M<n>.R: review` and run `full-stop`. PR body: the report link, a
-three-line summary, and "Merge to approve M<n>." (plus "Closes #<issue>" if
-there is one). CI failures get a `full-send` fix branch, then rebase.
+Commit `M<n>.R: review` on the milestone branch, open the milestone PR
+(`milestone/M<n>` into the default branch) and run `full-stop` on it. PR
+body: the report link, a three-line summary, the merged task PRs, and "Merge
+to approve M<n>." (plus "Closes #<issue>" for `M<n>.R` and the milestone's
+parent issue, if they exist). CI failures get a `full-send` fix branch, then rebase.
 
 Stop when `full-stop` reports ready. Tell the maintainer: read the report,
 answer open questions, merge, then run `milestone-start M<n+1>`.
