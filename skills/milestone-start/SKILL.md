@@ -38,6 +38,27 @@ them, and log what happens.
 - **Stop at the review.** Never merge the milestone PR, and never push to the
   default branch.
 
+## Branches
+
+Every milestone gets one feature branch, and every story merges into it:
+
+```text
+main (default branch)
+ └─ milestone/M<n>          feature branch for the milestone, cut from main at preflight
+     ├─ task/M<n>.1-<slug>  one branch per story, cut from milestone/M<n>
+     │    PR into milestone/M<n>, merged by its worker when checks pass
+     ├─ task/M<n>.2-<slug>
+     └─ ...                 the review (M<n>.R) also commits to milestone/M<n>
+milestone/M<n> -> main      the milestone PR, opened by milestone-review,
+                            merged only by the maintainer
+```
+
+- Story PRs always target `milestone/M<n>`, never the default branch.
+- Each new story branch starts from the latest `milestone/M<n>`, so it
+  includes every story merged before it.
+- The lead never commits to `milestone/M<n>` itself; workers do, through
+  their PRs.
+
 ## 1. Preflight (stop and report on failure)
 
 1. No task blocks for the milestone: run `milestone-plan` and stop.
@@ -51,7 +72,7 @@ them, and log what happens.
    from it.
 7. Plan waves from `after` and `files`.
 8. Run log: `.milestone-runs/M<n>.md`, added to `.git/info/exclude`.
-9. Show the plan (workers, waves, where it stops) and start.
+9. Show the plan (milestone branch, workers, waves, where it stops) and start.
 
 ## 2. Claims
 
