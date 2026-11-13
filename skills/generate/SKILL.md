@@ -69,12 +69,25 @@ job. Check a model's sizes, durations and reference limits with `models`.
    with `--first` once approved.
 4. **Run it.** Videos can take minutes: run in the background or with a long
    timeout. If cut off, use `resume <job-id>`.
+   **Several images at once** (variations, one per model, a set): send every
+   `generate.py image` call as its own Bash call in the same message, so they
+   run in parallel. Use plain parallel Bash calls, not subagents: a subagent
+   costs extra tokens and you still need to open each image yourself.
+   Before a batch, add up the estimates (`price`, or ~$0.05 per token-billed
+   image) and check that the month so far plus the batch fits the limit. The
+   script checks each run against the ledger *before* the others finish, so
+   parallel runs can overshoot the limit together. Quote the batch's total
+   once. If it is over $0.10, ask once for the whole batch.
 5. **Show it.** Open the image to look at it, check it matches the request,
    and give the user the file path and the real cost from the output.
 
 ## Rules
 
-- One generation at a time.
+- Run independent images in parallel (step 4). Run a video one at a time, and
+  run sequentially when a later image builds on an earlier one (`--ref` or
+  `--first` of a result).
+- Keep the default `GENERATIONS_DIR` unless the user names one: the ledger
+  lives there, so a different directory starts the month's total at zero.
 - Never describe a logo, face, product or UI in words when you can pass the
   real file with `--ref`.
 - On failure, say what failed and offer the next model in the same tier. Never
