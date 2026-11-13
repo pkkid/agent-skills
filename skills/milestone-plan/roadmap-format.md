@@ -39,6 +39,12 @@ after the maintainer approves that milestone's stories.
   `after` written as issue refs (`#12 (M2.3)`).
 - The parent and every story share one GitHub milestone, and all of them are
   added to the project board when the project has one.
+- After creating them, verify the links: the parent's `subIssues` count equals
+  the number of stories, and each story's `parent` is the parent issue.
+- Board views only show the hierarchy when grouped by **Parent issue** (or
+  with the Parent issue and Sub-issues progress fields shown). GitHub's API
+  cannot change views, so the first time, ask the maintainer to set that up
+  in the view menu and save it.
 - The roadmap links them: the milestone heading links the parent issue, each
   task block gets `- issue: #<n>`.
 - Task PRs merge into the milestone branch, which does not auto-close issues,
