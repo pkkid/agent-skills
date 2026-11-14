@@ -47,6 +47,14 @@ after the maintainer approves that milestone's stories.
   in the view menu and save it.
 - The roadmap links them: the milestone heading links the parent issue, each
   task block gets `- issue: #<n>`.
+- **Board status tracks the work.** The lead keeps each item's board Status
+  current (Todo, In Progress, Done, or the board's equivalents): a story goes
+  to In Progress when it is dispatched, stays there while blocked, returns to
+  Todo if its claim is released, and goes to Done when its PR merges. The
+  parent goes to In Progress when the milestone starts; `M<n>.R` goes to In
+  Progress when the review starts. Both go to Done when the maintainer merges
+  the milestone PR. Set it with `gh project item-edit`; do not rely on board
+  automations.
 - Task PRs merge into the milestone branch, which does not auto-close issues,
   so each worker closes its own story issue after its PR merges. The
   milestone PR closes `M<n>.R` and the parent issue.

@@ -45,6 +45,9 @@ usually 10 to 25 tasks in 2 to 4 waves. Each task is one PR.
 - Split along module seams. Tasks sharing a file are ordered with `after`.
 - Put shared types, interfaces and stubs for hotspot files in a small wave-1
   task, so wave 2 fans out.
+- List shared test files that every story will touch (contract tests, test
+  helpers) as hotspots with an owner, so the first story fixes them for the
+  rest.
 - Prefer vertical slices (command + UI + tests) over layers.
 - Keep the critical path short. Split any task that gates half the milestone.
 - Tests go with their task, never a separate task.
@@ -67,5 +70,8 @@ usually 10 to 25 tasks in 2 to 4 waves. Each task is one PR.
   [roadmap-format.md](roadmap-format.md#github-issues).
 - Called from `milestone-review`: write on its review branch and stop.
 - Otherwise: branch `roadmap/M<n>` (or `roadmap/init`), `file-pr`, and stop.
+  If you need a separate worktree for it, put it at
+  `~/Projects/.worktrees/<repo>/roadmap-m<n>` (never next to the repo) and
+  remove it once the PR merges.
   Never commit the roadmap to the default branch yourself. The maintainer
   merges it, then runs `milestone-start`.

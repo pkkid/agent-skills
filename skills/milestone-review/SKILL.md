@@ -30,6 +30,9 @@ push to the default branch: that merge is the maintainer's, a human's, only.**
 
 ## 1. Gather
 
+- Board (when stories are on one): move `M<n>.R` to In Progress, and check
+  every merged story shows Done. The parent and `M<n>.R` go to Done only
+  when the maintainer merges the milestone PR.
 - The milestone's tasks, its run log `.milestone-runs/M<n>.md`, merged PR
   bodies, and the last review report.
 - Questions: `QUESTION:` lines, `blocked:` tasks, and risky calls in PRs or
@@ -37,6 +40,13 @@ push to the default branch: that merge is the maintainer's, a human's, only.**
   decisions made.
 - User-visible changes, with before/after screenshots if there's a UI.
 - Loose ends: new TODOs, skipped tests, follow-ups.
+- Carry-over: every open item and `DEFERRED:` line that is still wanted goes
+  into the roadmap as a "Carried from M<n>" line under the milestone that
+  should own it, in the milestone PR. The review report alone is not enough.
+- Process lessons from the run log (stalls, slips, collisions): propose
+  edits to these milestone skills or the project's Milestone runs section.
+- Check each Done when line against a named test or artifact. A line with
+  none gets a fix task before the review, not a "met".
 - Run the full test suite once on a clean checkout. Record time, test count,
   and every number the Done when names. Write "not measured" over guessing.
 
@@ -61,7 +71,8 @@ branch merged into it). The PR you open is the **milestone PR**:
 `milestone/M<n>` into the default branch, holding every task's work plus:
 
 - the report;
-- roadmap: milestone ✅ in the Overview, review task ✅;
+- roadmap: milestone ✅ in the Overview, review task ✅, and the carry-over
+  lines above;
 - next milestone's tasks via `milestone-plan`, if missing or now stale;
 - the project's changelog or status docs, if any.
 
