@@ -51,6 +51,12 @@ usually 10 to 25 tasks in 2 to 4 waves. Each task is one PR.
 - Prefer vertical slices (command + UI + tests) over layers.
 - Keep the critical path short. Split any task that gates half the milestone.
 - Tests go with their task, never a separate task.
+- If fixtures were written from docs rather than real captures, the first
+  task captures (read-only) the shapes every gate depends on, such as roles
+  and permissions, and checks them against what the fixtures assume.
+  Captures need a signed-in session on the worker machine: add a
+  preflight line for the maintainer to sign in first, or every write that
+  depends on a capture is lost for the milestone.
 - List exact paths in `files`. A broad glob blocks parallelism.
 - End with `M<n>.R`, after every other task.
 

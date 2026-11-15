@@ -64,6 +64,8 @@ milestone/M<n> -> main      the milestone PR, opened by milestone-review,
 1. No task blocks for the milestone: run `milestone-plan` and stop.
 2. Default branch clean, up to date, and its checks pass.
 3. Previous milestone PR is merged into the default branch (by the maintainer).
+   If this milestone relies on answers from the previous review's manual
+   checks, confirm those checks are ticked; if not, report it before starting.
 4. Leftovers: check `git worktree list` (and any stray `../<repo>.worktrees`
    directory), open PRs and `task/*` branches for this milestone. Each becomes a claim (§2) or gets reported.
 5. `gh auth status` OK. Report free disk and RAM; use fewer workers if tight.
@@ -136,6 +138,9 @@ incidents.
   until it lands, or each merge knocks it behind again.
 - **Process slips** (visible windows, shared files or ports, sandbox):
   message every running worker at once, not just the one that slipped.
+- **Maintainer decision mid-run** that changes merged or running work:
+  dispatch the fix task and steer every running worker it touches at once,
+  with what changed and which files to stay out of.
 
 When only the review (or blocked work) remains: let running workers finish,
 remove idle worktrees, run `milestone-review`, and end with its PR, what
@@ -153,6 +158,12 @@ is milestone/M<n>, not the default branch: rebase onto milestone/M<n>, and
 full-send's merge gate means "up to date with milestone/M<n>". Never commit,
 push or merge to the default branch. After your PR merges, close your
 story's issue (merges into milestone/M<n> do not auto-close it). Also:
+- Right before merging, run `git fetch` and
+  `git merge-base --is-ancestor origin/milestone/M<n> HEAD`; if it fails,
+  rebase and wait for CI again. GitHub's mergeable flag is not enough.
+  Run the check again before every retried merge call, not only the first.
+- Never use a bare `git stash` (the stash is shared with other worktrees);
+  set work aside with a WIP commit.
 - Change only your task's `files`, plus small edits to shared registration
   files. Need another file? Stop and report needs-file.
 - Tick your task ✅ with the PR number in your PR. Show evidence for each
@@ -165,7 +176,7 @@ story's issue (merges into milestone/M<n> do not auto-close it). Also:
   ends your run before you can merge. Never poll with sleep.
 - If a delegated review cannot start or does not finish, self-review, say so
   in the PR, and carry on. Never end your run waiting on a review, including
-  after a resume.
+  after a resume: wait for it with a blocking call, or self-review.
 - Other workers share this machine: give scratch files names that include
   your task id, use random ports (port 0), and never open a visible window
   unless the project says how to check UI headless.

@@ -47,6 +47,10 @@ push to the default branch: that merge is the maintainer's, a human's, only.**
   edits to these milestone skills or the project's Milestone runs section.
 - Check each Done when line against a named test or artifact. A line with
   none gets a fix task before the review, not a "met".
+- A Done when that says no placeholders remain ("Coming soon", TODO
+  stubs): grep the code for them rather than trusting the story PRs.
+- If the previous review's manual checks are still unticked, say so as a
+  question; this milestone may have built on their unconfirmed answers.
 - Run the full test suite once on a clean checkout. Record time, test count,
   and every number the Done when names. Write "not measured" over guessing.
 
